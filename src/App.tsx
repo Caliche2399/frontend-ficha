@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
+import { CheckoutModal } from './components/CheckoutModal'
 import { ProductCard } from './components/ProductCard'
 import type { Product } from './helpers/types'
 
@@ -32,6 +33,7 @@ const initialProducts: Product[] = [
 
 function App() {
   const [products, setProducts] = useState(initialProducts)
+  const [purchase, setPurchase] = useState<{ product: Product; quantity: number } | null>(null)
 
   const decreaseStock = (productId: number, quantity: number) => {
     setProducts((current) =>
@@ -42,7 +44,7 @@ function App() {
   }
 
   const handleBuy = (product: Product, quantity: number) => {
-    decreaseStock(product.id, quantity)
+    setPurchase({ product, quantity })
   }
 
   return (
@@ -63,6 +65,15 @@ function App() {
           ))}
         </div>
       </Container>
+
+      {purchase && (
+        <CheckoutModal
+          product={purchase.product}
+          quantity={purchase.quantity}
+          onApproved={() => decreaseStock(purchase.product.id, purchase.quantity)}
+          onClose={() => setPurchase(null)}
+        />
+      )}
     </>
   )
 }
