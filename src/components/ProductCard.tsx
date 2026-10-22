@@ -55,7 +55,7 @@ export const ProductCard = ({ product, onBuy }: ProductCardProps) => {
                 <div className="mt-auto">
                     <div className="d-flex justify-content-between fw-bold fs-5 mb-3">
                         <span>Total</span>
-                        <span>${total}</span>
+                        <span>Q{total}</span>
                     </div>
 
                     <Button
