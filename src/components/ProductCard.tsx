@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, Button, Form } from "react-bootstrap"
+import { Badge, Card, Button, Form } from "react-bootstrap"
 import type { Product } from "../helpers/types"
 import { FaShoppingCart } from "react-icons/fa";
 
@@ -21,21 +21,26 @@ export const ProductCard = ({ product, onBuy }: ProductCardProps) => {
     }
 
     return (
-        <Card style={{ width: '18rem' }}>
+        <Card className="shadow-sm" style={{ width: '18rem' }}>
             <Card.Img
                 variant="top"
-                style={{ maxHeight: '250px' }}
+                style={{ height: '220px', objectFit: 'cover' }}
                 src={product.image}
                 alt={product.name}
             />
-            <Card.Body>
-                <Card.Title>{product.name}</Card.Title>
-                <Card.Text>{product.description}</Card.Text>
-                <Card.Text>Precio: ${product.price}</Card.Text>
-                <Card.Text>Stock disponible: {product.stock}</Card.Text>
+            <Card.Body className="d-flex flex-column">
+                <Card.Title className="fw-bold">{product.name}</Card.Title>
+                <Card.Text className="text-muted">{product.description}</Card.Text>
+
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                    <span className="fs-4 fw-semibold text-primary">${product.price}</span>
+                    <Badge bg={outOfStock ? 'danger' : 'success'}>
+                        Stock disponible: {product.stock}
+                    </Badge>
+                </div>
 
                 <Form.Group controlId={`quantity-${product.id}`} className="mb-3">
-                    <Form.Label>Cantidad</Form.Label>
+                    <Form.Label className="small text-muted mb-1">Cantidad</Form.Label>
                     <Form.Select
                         value={quantity}
                         disabled={outOfStock}
@@ -47,12 +52,22 @@ export const ProductCard = ({ product, onBuy }: ProductCardProps) => {
                     </Form.Select>
                 </Form.Group>
 
-                <Card.Text>Total: ${total}</Card.Text>
+                <div className="mt-auto">
+                    <div className="d-flex justify-content-between fw-bold fs-5 mb-3">
+                        <span>Total</span>
+                        <span>${total}</span>
+                    </div>
 
-                <Button variant="primary" disabled={outOfStock} onClick={handleBuy}>
-                    <FaShoppingCart style={{ marginRight: '0.5rem' }} />
-                    {outOfStock ? 'Agotado' : 'Comprar'}
-                </Button>
+                    <Button
+                        variant={outOfStock ? 'secondary' : 'primary'}
+                        className="w-100"
+                        disabled={outOfStock}
+                        onClick={handleBuy}
+                    >
+                        <FaShoppingCart className="me-2" />
+                        {outOfStock ? 'Agotado' : 'Comprar'}
+                    </Button>
+                </div>
             </Card.Body>
         </Card>
     )
