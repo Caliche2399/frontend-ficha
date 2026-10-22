@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import type { FormEvent } from 'react'
-import { Alert, Button, Col, Form, Row } from 'react-bootstrap'
+import type { SubmitEvent } from 'react'
+import { Button, Col, Form, Row } from 'react-bootstrap'
+import { AlertComponent } from './AlertComponent'
 import { FormField } from './FormField'
 import { formatCardNumber, formatExpiry, onlyDigits } from '../helpers/formatters'
 import {
@@ -63,7 +64,7 @@ export const PaymentForm = ({ total, onApproved, onCancel }: PaymentFormProps) =
     const touch = (field: Field) => setTouched((current) => ({ ...current, [field]: true }))
     const errorFor = (field: Field) => (touched[field] || submitted ? errors[field] : null)
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
         setSubmitted(true)
         if (hasErrors || processing) return
@@ -86,7 +87,7 @@ export const PaymentForm = ({ total, onApproved, onCancel }: PaymentFormProps) =
 
     return (
         <Form noValidate onSubmit={handleSubmit}>
-            {rejectedMessage && <Alert variant="danger">{rejectedMessage}</Alert>}
+            {rejectedMessage && <AlertComponent variant="danger" message={rejectedMessage} />}
 
             <FormField
                 id="holder"

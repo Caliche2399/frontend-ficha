@@ -1,4 +1,5 @@
 import { Button } from 'react-bootstrap'
+import { AlertComponent } from './AlertComponent'
 import type { Product } from '../helpers/types'
 
 interface PaymentSuccessProps {
@@ -13,7 +14,7 @@ interface PaymentSuccessProps {
 export const PaymentSuccess = ({ orderId, last4, product, quantity, total, onClose }: PaymentSuccessProps) => {
     return (
         <div>
-            <p className="fs-5">¡Gracias por tu compra!</p>
+            <AlertComponent variant="success" message="¡Pago aprobado! Gracias por tu compra." />
 
             <dl className="mb-4">
                 <dt>Número de orden</dt>

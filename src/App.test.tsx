@@ -92,6 +92,7 @@ describe('flujo de compra', () => {
         await advance(1500)
 
         expect(screen.getByText('Compra exitosa')).toBeInTheDocument()
+        expect(screen.getByRole('alert')).toHaveTextContent('¡Pago aprobado! Gracias por tu compra.')
         expect(screen.getByText(/^ORD-\d+$/)).toBeInTheDocument()
         expect(screen.getByText('Terminada en 1111')).toBeInTheDocument()
         expect(screen.getByText('Stock disponible: 8')).toBeInTheDocument()
@@ -119,7 +120,7 @@ describe('flujo de compra', () => {
         await user.click(screen.getByRole('button', { name: 'Pagar Q200' }))
         await advance(1500)
 
-        expect(screen.getByText('El pago fue rechazado por el banco')).toBeInTheDocument()
+        expect(screen.getByRole('alert')).toHaveTextContent('El pago fue rechazado por el banco')
         expect(screen.getByText('Stock disponible: 10')).toBeInTheDocument()
         expect(screen.getByLabelText('CVV')).toHaveValue('')
         expect(screen.getByRole('button', { name: 'Pagar Q200' })).toBeEnabled()
