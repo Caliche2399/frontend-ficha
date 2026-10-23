@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import type { SubmitEvent } from 'react'
+import type { ReactNode, SubmitEvent } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
+import { FaCcAmex, FaCcMastercard, FaCcVisa, FaLock } from 'react-icons/fa'
 import { AlertComponent } from './AlertComponent'
 import { FormField } from './FormField'
 import { formatCardNumber, formatExpiry, onlyDigits } from '../helpers/formatters'
@@ -23,6 +24,13 @@ const brandNames: Record<CardBrand, string> = {
     mastercard: 'Mastercard',
     amex: 'Amex',
     unknown: '',
+}
+
+const brandIcons: Record<CardBrand, ReactNode> = {
+    visa: <FaCcVisa size={22} className="me-1" aria-hidden="true" />,
+    mastercard: <FaCcMastercard size={22} className="me-1" aria-hidden="true" />,
+    amex: <FaCcAmex size={22} className="me-1" aria-hidden="true" />,
+    unknown: null,
 }
 
 const notTouched: Record<Field, boolean> = {
@@ -106,7 +114,7 @@ export const PaymentForm = ({ total, onApproved, onCancel }: PaymentFormProps) =
                 label="Número de tarjeta"
                 value={cardNumber}
                 error={errorFor('cardNumber')}
-                hint={brandNames[brand] ? `Marca: ${brandNames[brand]}` : undefined}
+                hint={brandNames[brand] ? <>{brandIcons[brand]} Marca: {brandNames[brand]}</> : undefined}
                 inputMode="numeric"
                 autoComplete="cc-number"
                 placeholder="4111 1111 1111 1111"
@@ -164,6 +172,7 @@ export const PaymentForm = ({ total, onApproved, onCancel }: PaymentFormProps) =
                     Cancelar
                 </Button>
                 <Button type="submit" disabled={processing}>
+                    <FaLock className="me-2" aria-hidden="true" />
                     {processing ? 'Procesando...' : `Pagar Q${total}`}
                 </Button>
             </div>

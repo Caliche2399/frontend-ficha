@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Badge, Card, Button, Form } from "react-bootstrap"
 import type { Product } from "../helpers/types"
-import { FaShoppingCart } from "react-icons/fa";
+import { FaBoxOpen, FaShoppingCart } from "react-icons/fa";
 
 
 interface ProductCardProps {
@@ -35,6 +35,7 @@ export const ProductCard = ({ product, onBuy }: ProductCardProps) => {
                 <div className="d-flex justify-content-between align-items-center mb-3">
                     <span className="fs-4 fw-semibold text-primary">${product.price}</span>
                     <Badge bg={outOfStock ? 'danger' : 'success'}>
+                        <FaBoxOpen className="me-1" aria-hidden="true" />
                         Stock disponible: {product.stock}
                     </Badge>
                 </div>

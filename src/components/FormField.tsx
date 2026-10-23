@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { Form } from 'react-bootstrap'
 
 interface FormFieldProps {
@@ -5,7 +6,7 @@ interface FormFieldProps {
     label: string
     value: string
     error: string | null
-    hint?: string
+    hint?: ReactNode
     type?: string
     inputMode?: 'text' | 'numeric' | 'email'
     autoComplete?: string

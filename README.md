@@ -31,7 +31,7 @@ La app queda en http://localhost:5173.
 
 ## Stack
 
-React 19, TypeScript, Vite, React-Bootstrap, Vitest y Testing Library.
+React 19, TypeScript, Vite, React-Bootstrap, React Icons, Vitest y Testing Library.
 
 ## Estructura
 

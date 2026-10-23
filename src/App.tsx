@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
+import { FaStore } from 'react-icons/fa'
 import { CheckoutModal } from './components/CheckoutModal'
 import { ProductCard } from './components/ProductCard'
 import type { Product } from './helpers/types'
@@ -51,7 +52,10 @@ function App() {
     <>
       <Navbar bg="dark" data-bs-theme="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="#">Ficha</Navbar.Brand>
+          <Navbar.Brand href="#">
+            <FaStore className="me-2" aria-hidden="true" />
+            Ficha
+          </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="#">Inicio</Nav.Link>
           </Nav>
