@@ -33,7 +33,7 @@ export const ProductCard = ({ product, onBuy }: ProductCardProps) => {
                 <Card.Text className="text-muted">{product.description}</Card.Text>
 
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                    <span className="fs-4 fw-semibold text-primary">${product.price}</span>
+                    <span className="fs-4 fw-semibold text-primary">Q{product.price}</span>
                     <Badge bg={outOfStock ? 'danger' : 'success'}>
                         <FaBoxOpen className="me-1" aria-hidden="true" />
                         Stock disponible: {product.stock}

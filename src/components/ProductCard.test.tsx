@@ -13,13 +13,13 @@ const product: Product = {
 }
 
 describe('ProductCard', () => {
-    it('muestra nombre, descripción, stock y total inicial', () => {
+    it('muestra nombre, descripción, precio, stock y total inicial', () => {
         render(<ProductCard product={product} onBuy={vi.fn()} />)
 
         expect(screen.getByText('Producto de prueba')).toBeInTheDocument()
         expect(screen.getByText('Descripcion de prueba')).toBeInTheDocument()
         expect(screen.getByText('Stock disponible: 5')).toBeInTheDocument()
-        expect(screen.getByText('Q100')).toBeInTheDocument()
+        expect(screen.getAllByText('Q100')).toHaveLength(2)
     })
 
     it('ofrece cantidades de 1 hasta el stock', () => {
@@ -36,6 +36,7 @@ describe('ProductCard', () => {
         await user.selectOptions(screen.getByLabelText('Cantidad'), '3')
 
         expect(screen.getByText('Q300')).toBeInTheDocument()
+        expect(screen.getByText('Q100')).toBeInTheDocument()
     })
 
     it('llama a onBuy con el producto y la cantidad elegida', async () => {
